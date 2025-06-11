@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWAGS Tracker - Debug Version</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .debug-panel { background: white; padding: 20px; border-radius: 8px; margin: 10px 0; border-left: 4px solid #007bff; }
+        .error { border-left-color: #dc3545; background: #fff5f5; }
+        .success { border-left-color: #28a745; background: #f8fff8; }
+        .warning { border-left-color: #ffc107; background: #fffbf0; }
+        code { background: #f8f9fa; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        .file-list { background: #f8f9fa; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .status { font-weight: bold; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔍 CWAGS Tracker Debug Panel</h1>
+    
+    <div class="debug-panel">
+        <h3>📁 Expected File Structure</h3>
+        <div class="file-list">
+            <strong>Your project folder should contain:</strong><br>
+            ├── css/ (folder)<br>
+            │   ├── main.css<br>
+            │   ├── forms.css<br>
+            │   ├── tables.css<br>
+            │   └── print.css<br>
+            ├── js/ (folder)<br>
+            │   ├── utils.js<br>
+            │   ├── database.js<br>
+            │   ├── calculations.js<br>
+            │   ├── search.js<br>
+            │   ├── display.js<br>
+            │   ├── owner-view.js<br>
+            │   └── certificates.js<br>
+            ├── data/ (folder)<br>
+            │   └── config.js<br>
+            ├── index.html<br>
+            ├── <strong>Data for Tracker web.xlsx</strong> ⭐<br>
+            ├── DogInfo.xlsx (optional)<br>
+            └── Title Placement.xlsx (optional)
+        </div>
+    </div>
+
+    <div class="debug-panel" id="fileLoadTest">
+        <h3>🔍 File Loading Test</h3>
+        <div id="loadResults">Testing file accessibility...</div>
+    </div>
+
+    <div class="debug-panel">
+        <h3>📤 Manual File Upload</h3>
+        <p>If auto-loading fails, upload your Excel file manually:</p>
+        <input type="file" id="manualFile" accept=".xlsx,.xls" style="margin: 10px 0;">
+        <button onclick="testManualUpload()" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px;">Test Upload</button>
+        <div id="uploadResults"></div>
+    </div>
+
+    <div class="debug-panel">
+        <h3>🌐 Network Status</h3>
+        <div id="networkStatus">Checking...</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <script>
+        // Test file loading
+        async function testFileLoading() {
+            const results = document.getElementById('loadResults');
+            results.innerHTML = '';
+            
+            const filesToTest = [
+                'Data for Tracker web.xlsx',
+                'DogInfo.xlsx', 
+                'Title Placement.xlsx',
+                'css/main.css',
+                'js/database.js',
+                'data/config.js'
+            ];
+            
+            for (const file of filesToTest) {
+                try {
+                    const response = await fetch(file);
+                    const status = response.ok ? 
+                        `<div class="status" style="color: green;">✅ ${file} - Found (${response.status})</div>` :
+                        `<div class="status" style="color: red;">❌ ${file} - Not found (${response.status})</div>`;
+                    results.innerHTML += status;
+                } catch (error) {
+                    results.innerHTML += `<div class="status" style="color: red;">❌ ${file} - Error: ${error.message}</div>`;
+                }
+                
+                // Small delay to avoid overwhelming the browser
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+        }
+        
+        function testManualUpload() {
+            const fileInput = document.getElementById('manualFile');
+            const resultsDiv = document.getElementById('uploadResults');
+            
+            if (!fileInput.files[0]) {
+                resultsDiv.innerHTML = '<div style="color: red;">Please select a file first</div>';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            resultsDiv.innerHTML = `
+                <div class="status" style="color: green;">✅ File selected: ${file.name}</div>
+                <div class="status">Size: ${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                <div class="status">Type: ${file.type}</div>
+                <div class="status">Last modified: ${new Date(file.lastModified).toLocaleString()}</div>
+            `;
+            
+            // Test reading the file
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    
+                    resultsDiv.innerHTML += `
+                        <div class="status" style="color: green;">✅ File read successfully!</div>
+                        <div class="status">Sheets found: ${workbook.SheetNames.join(', ')}</div>
+                    `;
+                    
+                    // Check for Data sheet
+                    if (workbook.SheetNames.includes('Data')) {
+                        const dataSheet = workbook.Sheets['Data'];
+                        const jsonData = XLSX.utils.sheet_to_json(dataSheet, {header: 1});
+                        resultsDiv.innerHTML += `
+                            <div class="status" style="color: green;">✅ Data sheet found with ${jsonData.length} rows</div>
+                        `;
+                    } else {
+                        resultsDiv.innerHTML += `
+                            <div class="status" style="color: orange;">⚠️ No 'Data' sheet found. Available sheets: ${workbook.SheetNames.join(', ')}</div>
+                        `;
+                    }
+                } catch (error) {
+                    resultsDiv.innerHTML += `<div class="status" style="color: red;">❌ Error reading file: ${error.message}</div>`;
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+        
+        function checkNetworkStatus() {
+            const statusDiv = document.getElementById('networkStatus');
+            
+            if (navigator.onLine) {
+                statusDiv.innerHTML = '<div class="status" style="color: green;">✅ Online - External libraries should load</div>';
+            } else {
+                statusDiv.innerHTML = '<div class="status" style="color: red;">❌ Offline - External libraries may not load</div>';
+            }
+            
+            // Test if XLSX library loaded
+            if (typeof XLSX !== 'undefined') {
+                statusDiv.innerHTML += '<div class="status" style="color: green;">✅ XLSX library loaded successfully</div>';
+            } else {
+                statusDiv.innerHTML += '<div class="status" style="color: red;">❌ XLSX library failed to load</div>';
+            }
+        }
+        
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            testFileLoading();
+            checkNetworkStatus();
+        });
+    </script>
+</body>
+</html>
