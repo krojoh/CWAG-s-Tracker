@@ -1,0 +1,221 @@
+/* Search Section Styles */
+.search-section {
+    padding: 30px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.search-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Input Styles */
+.search-input {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 300px;
+    max-width: 100%;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Button Styles */
+.search-btn {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.owner-view-btn {
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.owner-view-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+}
+
+/* File Upload Styles */
+.file-upload-section {
+    text-align: center;
+    padding: 40px;
+}
+
+.file-upload-section h3 {
+    color: #17a2b8;
+    margin-bottom: 20px;
+}
+
+.file-upload-area {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+    margin: 20px 0;
+}
+
+.file-upload-area input[type="file"] {
+    margin-bottom: 15px;
+}
+
+.upload-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.upload-btn:hover {
+    background: #218838;
+}
+
+.retry-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+.retry-btn:hover {
+    background: #5a6268;
+}
+
+/* Owner View Form Styles */
+.owner-view-form {
+    text-align: center;
+    padding: 40px;
+}
+
+.owner-view-form h3 {
+    color: #17a2b8;
+    margin-bottom: 20px;
+}
+
+.owner-id-input-area {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #dee2e6;
+    margin: 20px 0;
+}
+
+.owner-id-input {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.owner-id-input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.load-owner-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.load-owner-btn:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.back-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.back-btn:hover {
+    background: #5a6268;
+}
+
+/* Form Validation Styles */
+.form-error {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.form-success {
+    color: #28a745;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Responsive Form Styles */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .search-btn,
+    .owner-view-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .owner-id-input-area {
+        padding: 20px;
+    }
+    
+    .owner-id-input {
+        width: 100%;
+        max-width: 250px;
+    }
+}

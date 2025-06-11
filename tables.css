@@ -1,0 +1,302 @@
+/* Records Table Styles */
+.records-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.records-table th,
+.records-table td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
+}
+
+.records-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+.records-table tr:hover {
+    background: #f8f9fa;
+}
+
+/* Owner View Table Styles */
+.owner-view-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.owner-view-table th {
+    padding: 8px 4px;
+    text-align: center;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    background: #f8f9fa;
+}
+
+.owner-view-table th:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    background: #f8f9fa;
+    z-index: 10;
+}
+
+.owner-view-table td {
+    padding: 10px 8px;
+    text-align: center;
+    border-right: 1px solid #f0f0f0;
+    font-size: 0.75rem;
+}
+
+.owner-view-table td:first-child {
+    text-align: left;
+    border-right: 1px solid #dee2e6;
+    font-weight: 600;
+    background: #f8f9fa;
+    font-size: 0.8rem;
+}
+
+.owner-view-table tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Owner View Header Styles */
+.owner-header {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.owner-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.owner-controls {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.owner-controls button {
+    margin: 0 5px;
+}
+
+.change-owner-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+
+.change-owner-btn:hover {
+    background: #5a6268;
+}
+
+.print-btn {
+    background: #6f42c1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.print-btn:hover {
+    background: #5a2a8a;
+}
+
+/* Legend Styles */
+.legend-print {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #e7f3ff;
+    border: 1px solid #b8daff;
+    border-radius: 8px;
+}
+
+.legend-print h4 {
+    color: #004085;
+    margin-bottom: 10px;
+}
+
+.legend-print div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #004085;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-badge {
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.legend-title {
+    background: #d4edda;
+}
+
+.legend-ace {
+    background: #d4edda;
+}
+
+.legend-progress {
+    background: linear-gradient(135deg, #e8f5e8, #d4edda);
+}
+
+.legend-needs {
+    background: #fff3cd;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover {
+    opacity: 0.7;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Table Overflow Handling */
+.table-container {
+    overflow-x: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+/* Status Indicators */
+.status-title-earned {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-ace-progress {
+    background: linear-gradient(135deg, #e8f5e8, #d4edda);
+    color: #155724;
+}
+
+.status-needs-requirements {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-no-entries {
+    color: #666;
+}
+
+/* Clickable Dog Names */
+.dog-name-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.dog-name-link:hover {
+    text-decoration: underline;
+}
+
+.dog-handler-info {
+    color: #6c757d;
+    font-weight: normal;
+    font-size: 0.6rem;
+}
+
+.dog-reg-info {
+    color: #6c757d;
+    font-weight: normal;
+    font-size: 0.7rem;
+}
+
+/* Responsive Table Styles */
+@media (max-width: 768px) {
+    .owner-view-table {
+        font-size: 0.8rem;
+    }
+    
+    .owner-view-table th,
+    .owner-view-table td {
+        padding: 6px 4px;
+    }
+    
+    .records-table {
+        font-size: 0.8rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
+    
+    .legend-print div {
+        grid-template-columns: 1fr;
+    }
+}
